@@ -1,13 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
-/**
- *
- * @author parafuso828
- */
 public class Empresa {
 
     String nome;
@@ -24,7 +17,7 @@ public class Empresa {
     public Empresa() {
     }
 
-    public Empresa(String nome, Cliente[] clientes, Produto[] produtos, Venda[] vendas) {
+    public Empresa(String nome, Cliente[] clientes, Produto[] produtos, Venda[] vendas) throws IOException, FileNotFoundException, ClassNotFoundException {
         this.nome = nome;
         this.contc = clientes.length;
         this.contp = produtos.length;
@@ -34,9 +27,13 @@ public class Empresa {
         this.produtos = new Produto[np];
         this.vendas = new Venda[nv];
         
-        for (int i = 0; i < this.contc; i++) {
-            this.clientes[i] = clientes[i];
-        }
+       
+        
+        
+        this.clientes = (Cliente[])file.read();
+//        for (int i = 0; i < this.contc; i++) {
+//            this.clientes[i] = clientes[i];
+//        }
         for (int i = 0; i < this.contp; i++) {
             this.produtos[i] = produtos[i];
         }
