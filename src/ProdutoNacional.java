@@ -16,6 +16,6 @@ public class ProdutoNacional extends Produto {
 
     @Override
     float calcularPreco() {
-        return super.getValor() + (super.getTaxaImposto() * super.getValor());
+        return getValor() + (getTaxaImposto() * getValor());
     }
 }

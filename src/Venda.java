@@ -2,7 +2,8 @@
 import java.util.Calendar;
 
 public class Venda {
-
+    
+    private static final long serialVersionUID = 126L;
     private String numero;
     private Item[] itens;
     private int conti;
@@ -68,9 +69,8 @@ public class Venda {
 
     public float calcularTotal() {
         float soma = 0;
-        for (Item item : this.itens) {
-            float total = item.calcularTotal();
-            soma += total;
+        for (int i = 0; i < this.conti; i++) {
+            soma+=this.itens[i].calcularTotal();
         }
         return soma;
     }

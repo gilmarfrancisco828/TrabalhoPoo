@@ -10,7 +10,7 @@ public class ProdutoImportado extends Produto {
 
     @Override
     float calcularPreco() {
-        return super.getValor() + (super.getTaxaImposto() * super.getValor()) + (super.getValor() * getTaxaImportacao());
+        return getValor() + (getTaxaImposto() * getValor()) + (getValor() * getTaxaImportacao());
     }
 
     public float getTaxaImportacao() {

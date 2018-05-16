@@ -28,11 +28,10 @@ public class MenuRegistrarCompra extends Menu {
 
             //Seleciona quantos produtos do tipo selecionado serão comprados
             System.out.println("Entre com quantos produtos deseja comprar: ");
-            float quantidade = (float) input.nextInt();
+            float quantidade = input.nextFloat();
 
             //Instancia o Item
             Item item = new Item(emp.getContv(), Produto.buscarCodigo(emp.getProdutos(), codigo), quantidade);
-            System.out.println("Total: " + item.calcularTotal());
 
             //Adiciona o item criado a venda
             venda.addItem(item);

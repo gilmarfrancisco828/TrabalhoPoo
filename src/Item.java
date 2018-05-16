@@ -1,6 +1,7 @@
 
 public class Item {
-
+    
+    private static final long serialVersionUID = 125L;
     private int num;//O que é num????
     private Produto produto;
     private float quantidade;
@@ -12,9 +13,7 @@ public class Item {
     }
 
     public float calcularTotal() {
-        ProdutoNacional p= (ProdutoNacional) this.produto;
-        float preco = p.calcularPreco();
-        return (quantidade * preco);
+        return (this.quantidade * this.produto.calcularPreco());
     }
 
     public int getNum() {
