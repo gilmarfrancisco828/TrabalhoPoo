@@ -8,12 +8,36 @@
  *
  * @author luciano_simeao
  */
-public class Cartao extends TipoPagamento{
+public class Cartao extends TipoPagamento {
+
     String nome;
     String numero;
-    
-    @Override
-    void exibirDados(){
-        
+
+    public Cartao() {
+        super("Cartão");
     }
+
+    @Override
+    void exibirDados() {
+        System.out.println(this.tipoPagamento);
+        System.out.println("Emissor: " + this.getNome());
+        System.out.println("Número: " + this.getNumero());
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
 }

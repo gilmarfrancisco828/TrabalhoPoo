@@ -8,47 +8,14 @@
  *
  * @author luciano_simeao
  */
-public class ProdutoNacional extends Produto{
-        float taxaImposto;
-        
-            @Override
-            float calcularPreco(){
-                
-            }
-            
-            ProdutoNacional(String codigo, String descricao, float valor, float taxaImposto){
-                super()
-            }
+public class ProdutoNacional extends Produto {
 
-    public float getTaxaImposto() {
-        return taxaImposto;
+    ProdutoNacional(String codigo, int tipo, String descricao, float valor, float taxaImposto) {
+        super(tipo, codigo, descricao, valor, taxaImposto);
     }
 
-    public void setTaxaImposto(float taxaImposto) {
-        this.taxaImposto = taxaImposto;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public float getValor() {
-        return valor;
-    }
-
-    public void setValor(float valor) {
-        this.valor = valor;
+    @Override
+    float calcularPreco() {
+        return super.getValor() + (super.getTaxaImposto() * super.getValor());
     }
 }

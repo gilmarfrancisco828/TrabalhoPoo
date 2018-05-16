@@ -1,12 +1,13 @@
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Empresa {
 
     String nome;
-    int nc;
-    int np;
-    int nv;
+    final int nc = 500;
+    final int np = 500;
+    final int nv = 500;
     int contc;
     int contp;
     int contv;
@@ -15,48 +16,26 @@ public class Empresa {
     Venda vendas[];
 
     public Empresa() {
-    }
-
-    public Empresa(String nome, Cliente[] clientes, Produto[] produtos, Venda[] vendas) throws IOException, FileNotFoundException, ClassNotFoundException {
-        this.nome = nome;
-        this.contc = clientes.length;
-        this.contp = produtos.length;
-        this.contv = vendas.length;
-        
         this.clientes = new Cliente[nc];
         this.produtos = new Produto[np];
         this.vendas = new Venda[nv];
-        
-       
-        
-        
-        this.clientes = (Cliente[])file.read();
-//        for (int i = 0; i < this.contc; i++) {
-//            this.clientes[i] = clientes[i];
-//        }
-        for (int i = 0; i < this.contp; i++) {
-            this.produtos[i] = produtos[i];
-        }
-        for (int i = 0; i < this.contv; i++) {
-            this.vendas[i] = vendas[i];
-        }
     }
 
-    public void addCliente(Cliente cli, int nc) {
+    public void addCliente(Cliente cli) {
         if (contc < nc) {
             this.clientes[contc] = cli;
             contc++;
         }
     }
 
-    public void addProdutos(Produto pro, int np) {
+    public void addProduto(Produto pro) {
         if (contp < np) {
             this.produtos[contp] = pro;
             contp++;
         }
     }
 
-    public void addProdutos(Venda ven, int nv) {
+    public void addVenda(Venda ven) {
         if (contv < nv) {
             this.vendas[contv] = ven;
             contv++;
@@ -93,7 +72,10 @@ public class Empresa {
     }
 
     public Cliente[] getClientes() {
-        return clientes;
+        Cliente[] clis;
+        clis = new Cliente[this.contc];
+        System.arraycopy(this.clientes, 0, clis, 0, this.contc);
+        return clis;
     }
 
     public void setClientes(Cliente[] clientes) {
@@ -101,7 +83,10 @@ public class Empresa {
     }
 
     public Produto[] getProdutos() {
-        return produtos;
+        Produto[] prods;
+        prods = new Produto[this.contp];
+        System.arraycopy(this.produtos, 0, prods, 0, this.contp);
+        return prods;
     }
 
     public void setProdutos(Produto[] produtos) {
@@ -115,4 +100,74 @@ public class Empresa {
     public void setVendas(Venda[] vendas) {
         this.vendas = vendas;
     }
+
+    public int getContc() {
+        return contc;
+    }
+
+    public int getContp() {
+        return contp;
+    }
+
+    public int getContv() {
+        return contv;
+    }
+
+    public static void salvar(Empresa emp) throws IOException {
+        //Salvando clientes
+        File fclientes;
+        fclientes = new File("clientes.dat");
+        fclientes.write(emp.getClientes());
+
+        //Salvando produtos
+        File fprodutos;
+        fprodutos = new File("produtos.dat");
+        fprodutos.write(emp.getProdutos());
+        
+        //Salvando compras
+        File fvendas;
+        fvendas = new File("compras.dat");
+        fvendas.write(emp.getVendas());
+    }
+
+    public static void carregar(Empresa emp) throws IOException, FileNotFoundException, ClassNotFoundException {
+        //Carregando produtos
+        File fprodutos = new File("produtos.dat");
+        Object oprodutos[];
+        oprodutos = fprodutos.read();
+        if (oprodutos != null) {
+            for (Object oproduto : oprodutos) {
+                //Verifica qual o tipo do produto e faz a devida conversão
+                Produto p = (Produto) oproduto;
+                if (p.getTipo() == 1) {
+                    emp.addProduto((ProdutoNacional) p);
+                } else if (p.getTipo() == 2) {
+                    emp.addProduto((ProdutoImportado) p);
+                }
+            }
+        }
+
+        //Carregando clientes
+        File fclientes = new File("clientes.dat");
+        Object oclientes[];
+        oclientes = fclientes.read();
+
+        if (oclientes != null) {
+            for (Object ocliente : oclientes) {
+                emp.addCliente((Cliente) ocliente);
+            }
+        }
+        
+        //Carregando vendas
+        File fvendas = new File("vendas.dat");
+        Object ovendas[];
+        ovendas = fvendas.read();
+
+        if (ovendas != null) {
+            for (Object ovenda : ovendas) {
+                emp.addVenda((Venda) ovenda);
+            }
+        }
+    }
+
 }
