@@ -2,6 +2,8 @@ package Telas;
 
 import Controlador.Cliente;
 import Controlador.Empresa;
+import Controlador.Produto;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class TelaRelatorioCliente extends javax.swing.JFrame {
@@ -39,6 +41,9 @@ public class TelaRelatorioCliente extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         qtdClientes = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        pesquisar = new javax.swing.JButton();
+        cpfCliente = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,6 +67,11 @@ public class TelaRelatorioCliente extends javax.swing.JFrame {
             }
         });
         tableClientes.getTableHeader().setReorderingAllowed(false);
+        tableClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableClientesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableClientes);
         if (tableClientes.getColumnModel().getColumnCount() > 0) {
             tableClientes.getColumnModel().getColumn(0).setResizable(false);
@@ -78,6 +88,15 @@ public class TelaRelatorioCliente extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        pesquisar.setText("Pesquisar");
+        pesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pesquisarActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("CPF:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,6 +118,13 @@ public class TelaRelatorioCliente extends javax.swing.JFrame {
                         .addComponent(qtdClientes)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cpfCliente)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pesquisar)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -106,8 +132,13 @@ public class TelaRelatorioCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(cpfCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pesquisar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -126,6 +157,29 @@ public class TelaRelatorioCliente extends javax.swing.JFrame {
         telaAnterior.setEnabled(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void pesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarActionPerformed
+        String cpf = this.cpfCliente.getText();
+        boolean vazio = cpf.equals("");
+
+        DefaultTableModel model = (DefaultTableModel) this.tableClientes.getModel();
+        this.tableClientes.setModel(model);
+        model.setRowCount(0);
+        Integer qtd = 0;
+        for (Cliente cli : emp.getClientes()) {
+            if (cpf.equals(cli.getCpf()) || vazio) {
+                qtd++;
+                model.addRow(new Object[]{cli.getNome(), cli.getCpf()});
+            }
+        }
+        this.qtdClientes.setText(qtd.toString());
+    }//GEN-LAST:event_pesquisarActionPerformed
+
+    private void tableClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableClientesMouseClicked
+        DefaultTableModel model = (DefaultTableModel) this.tableClientes.getModel();
+      Cliente c = Controlador.Cliente.buscarCpf(emp.getClientes(), (String) model.getValueAt(this.tableClientes.getSelectedRow(), 1));
+      JOptionPane.showMessageDialog(null, c.relatorioDetalhado(), "Cliente", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_tableClientesMouseClicked
 
     /**
      * @param args the command line arguments
@@ -163,10 +217,13 @@ public class TelaRelatorioCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField cpfCliente;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton pesquisar;
     private javax.swing.JLabel qtdClientes;
     private javax.swing.JTable tableClientes;
     // End of variables declaration//GEN-END:variables

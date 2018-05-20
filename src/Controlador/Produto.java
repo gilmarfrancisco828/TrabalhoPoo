@@ -80,16 +80,7 @@ public abstract class Produto implements Serializable {
         System.out.println(this.getCodigo() + "\t   " + this.getDescricao() + space + "\t  R$ " + calcularPreco());
     }
 
-    public void relatorioDetalhado() {
-        System.out.println("CÓDIGO: \t" + this.getCodigo());
-        System.out.println("DESCRIÇÃO: \t" + this.getDescricao());
-        System.out.println("PREÇO: \t\t" + calcularPreco());
-        if (this.getTipo() == 1) {
-            System.out.println("TIPO: \t\tProduto Nacional");
-        } else if (this.getTipo() == 2) {
-            System.out.println("TIPO: \t\tProduto Importado");
-        }
-    }
+    abstract public String relatorioDetalhado() ;
 
     public static Produto buscarCodigo(Produto[] produtos, String codigo) {
         for (Produto produto : produtos) {

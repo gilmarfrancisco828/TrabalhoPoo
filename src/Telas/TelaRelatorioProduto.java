@@ -3,16 +3,19 @@ package Telas;
 import Controlador.Cliente;
 import Controlador.Empresa;
 import Controlador.Produto;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class TelaRelatorioProduto extends javax.swing.JFrame {
+
     TelaPrincipal telaAnterior;
     Empresa emp;
+
     public TelaRelatorioProduto(TelaPrincipal telaAnterior, Empresa emp) {
         initComponents();
         this.emp = emp;
         this.telaAnterior = telaAnterior;
-        
+
         DefaultTableModel model = (DefaultTableModel) this.tableClientes.getModel();
         this.tableClientes.setModel(model);
         Integer qtd = 0;
@@ -38,6 +41,9 @@ public class TelaRelatorioProduto extends javax.swing.JFrame {
         qtdProdutos = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        pesquisar = new javax.swing.JButton();
+        codProduto = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,6 +67,11 @@ public class TelaRelatorioProduto extends javax.swing.JFrame {
             }
         });
         tableClientes.getTableHeader().setReorderingAllowed(false);
+        tableClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableClientesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableClientes);
         if (tableClientes.getColumnModel().getColumnCount() > 0) {
             tableClientes.getColumnModel().getColumn(0).setResizable(false);
@@ -80,6 +91,15 @@ public class TelaRelatorioProduto extends javax.swing.JFrame {
 
         jLabel2.setText("Total: ");
 
+        pesquisar.setText("Pesquisar");
+        pesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pesquisarActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Código:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -87,14 +107,23 @@ public class TelaRelatorioProduto extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.CENTER)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(qtdProdutos)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(jButton1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(codProduto)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(pesquisar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(81, 81, 81)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -102,8 +131,13 @@ public class TelaRelatorioProduto extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pesquisar)
+                    .addComponent(codProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -121,6 +155,29 @@ public class TelaRelatorioProduto extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void pesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarActionPerformed
+        String codigo = this.codProduto.getText();
+        boolean vazio = codigo.equals("");
+
+        DefaultTableModel model = (DefaultTableModel) this.tableClientes.getModel();
+        this.tableClientes.setModel(model);
+        model.setRowCount(0);
+        Integer qtd = 0;
+        for (Produto pro : emp.getProdutos()) {
+            if (codigo.equals(pro.getCodigo()) || vazio) {
+                qtd++;
+                model.addRow(new Object[]{pro.getCodigo(), pro.getDescricao(), pro.getTipoDescricao(), "R$" + String.format("%.02f", pro.getValor())});
+            }
+        }
+        this.qtdProdutos.setText(qtd.toString());
+    }//GEN-LAST:event_pesquisarActionPerformed
+
+    private void tableClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableClientesMouseClicked
+      DefaultTableModel model = (DefaultTableModel) this.tableClientes.getModel();
+      Produto p = Controlador.Produto.buscarCodigo(emp.getProdutos(), (String) model.getValueAt(this.tableClientes.getSelectedRow(), 0));
+      JOptionPane.showMessageDialog(null, p.relatorioDetalhado(), "Produto", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_tableClientesMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -135,16 +192,24 @@ public class TelaRelatorioProduto extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaRelatorioProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaRelatorioProduto.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaRelatorioProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaRelatorioProduto.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaRelatorioProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaRelatorioProduto.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaRelatorioProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaRelatorioProduto.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -157,10 +222,13 @@ public class TelaRelatorioProduto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField codProduto;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton pesquisar;
     private javax.swing.JLabel qtdProdutos;
     private javax.swing.JTable tableClientes;
     // End of variables declaration//GEN-END:variables

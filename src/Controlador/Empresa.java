@@ -133,7 +133,7 @@ public class Empresa {
         File fprodutos;
         fprodutos = new File("produtos.dat");
         fprodutos.write(emp.getProdutos());
-        
+
         //Salvando compras
         File fvendas;
         fvendas = new File("vendas.dat");
@@ -141,6 +141,17 @@ public class Empresa {
     }
 
     public static void carregar(Empresa emp) throws IOException, FileNotFoundException, ClassNotFoundException {
+        //Carregando clientes
+        File fclientes = new File("clientes.dat");
+        Object oclientes[];
+        oclientes = fclientes.read();
+
+        if (oclientes != null) {
+            for (Object ocliente : oclientes) {
+                emp.addCliente((Cliente) ocliente);
+            }
+        }
+        
         //Carregando produtos
         File fprodutos = new File("produtos.dat");
         Object oprodutos[];
@@ -157,17 +168,6 @@ public class Empresa {
             }
         }
 
-        //Carregando clientes
-        File fclientes = new File("clientes.dat");
-        Object oclientes[];
-        oclientes = fclientes.read();
-
-        if (oclientes != null) {
-            for (Object ocliente : oclientes) {
-                emp.addCliente((Cliente) ocliente);
-            }
-        }
-        
         //Carregando vendas
         File fvendas = new File("vendas.dat");
         Object ovendas[];

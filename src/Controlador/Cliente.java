@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Cliente implements Serializable {
 
+    private static final long serialVersionUID = 888L;
     String cpf;
     String nome;
 
@@ -35,9 +36,8 @@ public class Cliente implements Serializable {
         System.out.println(this.getNome() + "\t\t\t  " + this.getCpf());
     }
 
-    public void relatorioDetalhado() {
-        System.out.println("NOME: \t" + this.getNome());
-        System.out.println("CPF: \t" + this.getCpf());
+    public String relatorioDetalhado() {
+        return "Nome: " + this.getNome() + "\nCPF: " + this.getCpf();
     }
 
     public static Cliente buscarCpf(Cliente[] clientes, String cpf) {
