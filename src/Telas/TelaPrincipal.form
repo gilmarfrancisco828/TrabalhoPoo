@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Container class="javax.swing.JMenu" name="jMenu1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jMenu1"/>
+      </Properties>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
+    </Container>
+    <Component class="java.awt.Label" name="label1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="label1"/>
+      </Properties>
+    </Component>
+    <Menu class="java.awt.PopupMenu" name="popupMenu1">
+      <Properties>
+        <Property name="label" type="java.lang.String" value="popupMenu1"/>
+      </Properties>
+    </Menu>
+    <Component class="javax.swing.JMenuItem" name="jMenuItem1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jMenuItem1"/>
+      </Properties>
+    </Component>
+  </NonVisualComponents>
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+    </Property>
+    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+      <Color id="Default Cursor"/>
+    </Property>
+    <Property name="location" type="java.awt.Point" editor="org.netbeans.beaninfo.editors.PointEditor">
+      <Point value="[400, 200]"/>
+    </Property>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowClosed" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosed"/>
+  </Events>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="botaoCarregarDados" pref="117" max="32767" attributes="0"/>
+                  <Component id="botaoCadastrar" max="32767" attributes="0"/>
+                  <Component id="botaoRelatorios" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace pref="72" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="botaoSair" alignment="1" max="32767" attributes="0"/>
+                  <Component id="botaoSalvarDados" alignment="1" max="32767" attributes="0"/>
+                  <Component id="botaoRegistrarCompra" alignment="1" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" pref="183" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+              <Component id="jLabel1" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="botaoCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="botaoRegistrarCompra" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="botaoCarregarDados" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="botaoSalvarDados" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="botaoRelatorios" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="botaoSair" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JButton" name="botaoCadastrar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cadastrar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botaoCadastrarMouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoCadastrarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="botaoCarregarDados">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Carregar Dados"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoCarregarDadosActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="botaoSalvarDados">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Salvar Dados"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoSalvarDadosActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="botaoRegistrarCompra">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Registrar Compra"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoRegistrarCompraActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="botaoRelatorios">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Relat&#xf3;rios"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoRelatoriosActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="botaoSair">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Exit"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoSairActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Microsoft Sans Serif" size="18" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="MENU PRINCIPAL"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>
