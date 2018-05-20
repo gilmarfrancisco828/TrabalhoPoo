@@ -18,7 +18,7 @@ public class TelaRelatorioProduto extends javax.swing.JFrame {
         Integer qtd = 0;
         for (Produto pro : emp.getProdutos()) {
             qtd++;
-            model.addRow(new Object[]{pro.getCodigo(), pro.getDescricao(), pro.getTipoDescricao(), pro.getValor()});
+            model.addRow(new Object[]{pro.getCodigo(), pro.getDescricao(), pro.getTipoDescricao(), String.format("%.02f", pro.getValor())});
         }
         this.qtdProdutos.setText(qtd.toString());
     }

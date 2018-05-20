@@ -78,7 +78,8 @@ public class Venda implements Serializable{
         return soma;
     }
     public String getData(){
-        return this.data.get(Calendar.DAY_OF_MONTH)+"/"+this.data.get(Calendar.MONTH)+"/"+this.data.get(Calendar.YEAR);
+        return String.format("%02d", this.data.get(Calendar.DAY_OF_MONTH)) + "/" +
+                    String.format("%02d",  this.data.get(Calendar.MONTH)) + "/" + this.data.get(Calendar.YEAR);
     }
     
     public static Venda buscarCodigo(Venda[] vendas, String codigo) {

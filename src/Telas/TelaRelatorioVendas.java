@@ -4,6 +4,7 @@ import Controlador.Empresa;
 import Controlador.Item;
 import Controlador.TipoPagamento;
 import Controlador.Venda;
+import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -28,10 +29,10 @@ public class TelaRelatorioVendas extends javax.swing.JFrame {
                     ven.getCliente().getCpf(),
                     ven.getNumero(),
                     ven.getData(),
-                    "R$ " + ven.calcularTotal(),
+                    "R$ " + String.format("%.02f", ven.calcularTotal()),
                     ven.getTipoPgto().getTipoPagamento()});
             }
-            this.qtdVendas.setText(qtd.toString());
+            this.qtdVendas.setText(String.format("%.02f", qtd));
         }
     }
 
@@ -227,11 +228,11 @@ public class TelaRelatorioVendas extends javax.swing.JFrame {
                         ven.getCliente().getCpf(),
                         ven.getNumero(),
                         ven.getData(),
-                        "R$ " + ven.calcularTotal(),
+                        "R$ " + String.format("%.02f", ven.calcularTotal()),
                         ven.getTipoPgto().getTipoPagamento()});
                 }
             }
-            this.qtdVendas.setText(qtd.toString());
+            this.qtdVendas.setText(String.format("%.02f", qtd));
         }
     }//GEN-LAST:event_pesquisarActionPerformed
 
@@ -243,15 +244,15 @@ public class TelaRelatorioVendas extends javax.swing.JFrame {
         v = Controlador.Venda.buscarCodigo(emp.getVendas(), (String) model.getValueAt(this.tableClientes.getSelectedRow(), 2));
         if (v != null) {
             String relatorio = "Nota Fiscal: \t" + v.getNumero();
-            relatorio+="\nData: \t" + v.getData();
-            relatorio+="\n\nCliente: \t" + v.getCliente().getNome();
-            relatorio+="\nCPF: \t" + v.getCliente().getCpf();
-            relatorio+="\n\nProduto:";
+            relatorio += "\nData: \t" + v.getData();
+            relatorio += "\n\nCliente: \t" + v.getCliente().getNome();
+            relatorio += "\nCPF: \t" + v.getCliente().getCpf();
+            relatorio += "\n\nProduto:";
             for (Item item : v.getItens()) {
-                relatorio+="\n \t\t#" + item.getProduto().getCodigo() + " - " + item.getProduto().getDescricao() + "(" + item.getQuantidade()+ ") - R$ " + item.calcularTotal();
+                relatorio += "\n \t\t#" + item.getProduto().getCodigo() + " - " + item.getProduto().getDescricao() + "(" + item.getQuantidade() + ") - R$ " + String.format("%.02f", item.calcularTotal());
             }
-            relatorio+="\n\nPagamento: \t" + v.getTipoPgto().exibirDados();
-            relatorio+="\n\nTotal: \tR$" + v.calcularTotal();
+            relatorio += "\n\nPagamento: \t" + v.getTipoPgto().exibirDados();
+            relatorio += "\n\nTotal: \tR$" + String.format("%.02f", v.calcularTotal());
             JOptionPane.showMessageDialog(null, relatorio, "Venda", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_tableClientesMouseClicked
